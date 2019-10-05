@@ -1,0 +1,96 @@
+<div class="text-center">
+  MOVIE LIST
+</div>
+<div class="container">
+  <nav class="navbar navbar-expand-sm bg-light">
+    <ul class="navbar-nav">
+      <li class="nav-item" style="padding-left:0.2in">
+        <a class="btn btn-primary" (click)="changeSection(1)">Home</a>
+      </li>
+      <li class="nav-item" style="padding-left:0.2in">
+        <a class="btn btn-primary" (click)="changeSection(2)">Add Movie</a>
+      </li>
+      <li class="nav-item" style="padding-left:0.2in">
+        <a class="btn btn-primary" (click)="changeSection(3)">Update Movie</a>
+      </li>
+      <li class="nav-item" style="padding-left:0.2in">
+        <a class="btn btn-primary" (click)="changeSection(4)">Delete Movie</a>
+      </li>
+      <li class="nav-item" style="padding-left:0.2in">
+        <a class="btn btn-primary" (click)="changeSection(5)">aYear Movie</a>
+      </li>
+      <li class="nav-item" style="padding-left:0.2in">
+            <a class="btn btn-primary" (click)="changeSection(6)">Insert Actor</a>
+          </li>
+    </ul>
+  </nav>
+  <div *ngIf='selection==1'>
+    <table class="table table-dark table-striped table-hover">
+      <thead class="table-head">
+        <tr>
+          <td>TITLE</td>
+          <td>YEAR</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of movies">
+          <td>{{item.title}}</td>
+          <td>{{item.year}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf='selection==2'>
+    <div class="form-group">
+      <label for="title">TITLE</label>
+      <input type="text" name="title" id="title" placeholder="enter actor title" [(ngModel)]='title'
+        class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="year">YEAR</label>
+      <input type="number" name="year" id="year" placeholder="enter movie year" [(ngModel)]='year' class="form-control">
+    </div>
+    <input type="submit" value='SUBMIT' (click)='saveNewMovie()' class="btn btn-primary">
+  </div>
+
+  <div *ngIf="selection==4">
+    <table class="table table-dark table-striped table-hover">
+      <thead class="table-head">
+        <tr>
+          <td>TITLE</td>
+          <td>YEAR</td>
+          <td>DELETE</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of movies">
+          <td>{{item.title}}</td>
+          <td>{{item.year}}</td>
+          <td><button class="btn btn-danger" (click)='deleteMovies(item)'>DELETE</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="selection==5">
+    <div class="form-group">
+      <label for="year">YEAR</label>
+      <input type="number" name="year" id="year" placeholder="enter movie year" [(ngModel)]='year' class="form-control">
+    </div>
+    <input type="submit" value='DELETE' (click)='deleteMovieByYear()' class="btn btn-warning">
+  </div>
+<div *ngIf="selection==6">
+    <div class="form-group">
+    <label for="id">SELECT A MOVIE</label>
+    <select name='id' id='id' [(ngModel)]='id' class="form-control">
+    <option *ngFor="let item of movies" value='{{item._id}}'>{{item.title}}</option>
+    </select>
+</div>
+<div class="form-group">
+        <label for="id">SELECT A ACTOR</label>
+        <select name='id' id='id' [(ngModel)]='actorId' class="form-control">
+        <option *ngFor="let item of actors" value='{{item._id}}'>{{item.name}}</option>
+        </select>
+    </div>
+    <input type="submit" value='INSERT ACTOR' (click)='insertActorToMovie()' class="btn btn-primary">
+</div>
+</div>
